@@ -14,9 +14,18 @@
     }
     $(function() {
         $('#button-user').bind('click', function() {
+            /*
             $.getJSON('/generateUrl', {}, function(data) {
                 $("#key_href").attr("href", data.result);
-            });
+            });*/
+            $.ajax({
+                type: "GET",
+                url: '/generateUrl',
+                contentType: "application/xml; charset=utf-8",
+                success: function(data) {
+                    $("#key_href").attr("href", data.result);
+            }
+        });
             return false;
         });
     });
