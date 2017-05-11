@@ -10,11 +10,11 @@ class Array:
         Creates an array with size elements.
         :param size: size of array.
         """
-        assert size > 0, "Array size must be > 0"
+        if size < 1:
+            raise ValueError("Array size must be > 0")
         self._size = size
         PyArrayType = ctypes.py_object * size
         self._elements = PyArrayType()
-        self.clear(None)
 
     def __len__(self):
         """
@@ -43,14 +43,6 @@ class Array:
             raise IndexError('Invalid index')
         self._elements[index] = value
 
-    def clear(self, value):
-        """
-        Clears the array by setting each element to the given value.
-        :param value: the value of element.
-        """
-        for i in range(len(self)):
-            self._elements[i] = value
-
     def __iter__(self):
         """
         Returns the array's iterator for traversing the elements.
@@ -72,12 +64,6 @@ class DynamicArray:
         self._capacity = 1
         self._elements = Array(self._capacity)
 
-    def __repr__(self):
-        res = "["
-        for i in self._elements:
-            res += str(i) + ", "
-        return res[:-2] + "]"
-
     def __len__(self):
         """
         Returns the number of elements in the array.
@@ -94,6 +80,12 @@ class DynamicArray:
         if not 0 <= index < self._size:
             raise IndexError('Invalid index')
         return self._elements[index]
+
+    def __repr__(self):
+        res = "["
+        for i in self._elements:
+            res += str(i) + ", "
+        return res[:-2] + "]"
 
     def append(self, value):
         """

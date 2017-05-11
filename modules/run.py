@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, jsonify, Markup
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 import discogs_client
 
 app = Flask(__name__)

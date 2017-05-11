@@ -1,4 +1,4 @@
-import doc.structure as arr
+import doc.structure as structures
 
 
 class InfoProcessing(object):
@@ -24,7 +24,17 @@ class InfoProcessing(object):
         """
         self._info = self.client.search(value, **keys)
 
-    def filter_info(self, info):
+    @staticmethod
+    def _get(obj, key):
+        try:
+            return obj.data[key]
+        except KeyError:
+            try:
+                return getattr(obj, key)
+            except AttributeError:
+                raise ValueError("Incorrect key value")
+
+    def filter_info(self, key):
         """
         Filter.
         :param info: 
@@ -32,19 +42,16 @@ class InfoProcessing(object):
         """
         self._filtered_info = {}
         for obj in self._info:
-            if isinstance(obj.data[info], list):
-                for element in obj.data[info]:
-                    if element in self._filtered_info:
-                        self._filtered_info[element].append(obj)
-                    else:
-                        self._filtered_info[element] = arr.DynamicArray()
-                        self._filtered_info[element].append(obj)
+            data = self._get(obj, key)
+            if isinstance(data, list):
+                for element in data:
+                    if element not in self._filtered_info:
+                        self._filtered_info[element] = structures.DynamicArray()
+                    self._filtered_info[element].append(obj)
             else:
-                if obj.data[info] in self._filtered_info:
-                    self._filtered_info[obj.data[info]].append(obj)
-                else:
-                    self._filtered_info[obj.data[info]] = arr.DynamicArray()
-                    self._filtered_info[obj.data[info]].append(obj)
+                if data not in self._filtered_info:
+                    self._filtered_info[data] = structures.DynamicArray()
+                self._filtered_info[data].append(obj)
 
     def the_most_used(self):
         """
