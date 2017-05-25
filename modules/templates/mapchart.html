@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Research</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/static/mapchart.js"></script>
+</head>
+<body>
+<div class="container">
+    <form class="form-inline", role="form", method="post", style="text-align: center">
+        <div class="input-group">
+            <div class="input-group-addon" style="width: 60px">Type</div>
+            <input type="text" name="type" class="form-control" value="release" style="width: 100px" required disabled>
+        </div>
+        <div class="input-group">
+            <div class="input-group-addon" style="width: 60px">Style</div>
+            <input type="text" name="style" class="form-control" style="width: 100px" required>
+        </div>
+        <div class="input-group">
+            <div class="input-group-addon" style="width: 60px">Year</div>
+            <input type="text" name="year" class="form-control" placeholder="1990-2017" style="width: 100px" required>
+        </div>
+        <br>
+        <input type="button" class="btn btn-default" onclick="get_chart()" value="Submit">
+    </form>
+    <div id="regions_div" style="width: 1200px; height: 500px; display: none"></div>
+</div>
+</body>
+</html>

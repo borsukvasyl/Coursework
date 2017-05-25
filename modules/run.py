@@ -1,77 +1,32 @@
-from flask import Flask, render_template, request, url_for, redirect, jsonify
+from flask import Flask, render_template, request, jsonify
 import discogs_client
+import modules.process as map_process
 
 app = Flask(__name__)
-client = None
+
 
 @app.route('/')
 def main():
-    return redirect(url_for("home"))
+    return render_template("mapchart.html")
 
 
-@app.route('/home')
-def home():
-    global client
-    return render_template('home.html', client=client)
+@app.route("/build_mapchart", methods=["GET"])
+def build_mapchart():
+    client = discogs_client.Client('ExampleApplication/0.1',
+                              user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
 
+    type = request.args.get('type', 0, type=str)
+    style = request.args.get('style', 0, type=str)
+    year = int(request.args.get('year', 0, type=int))
 
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    if request.method == "GET":
-        return render_template('login.html', authorize_url=None)
-    elif request.method == "POST":
-        global client
-        key = request.form['key']
-        if key:
-            client.get_access_token(key)
-            return redirect(url_for('home'))
-        else:
-            client = discogs_client.Client('ExampleApplication/0.1',
-                            user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
-        return redirect(url_for('home'))
-
-
-@app.route('/generateUrl')
-def generate_url():
-    global client
-    client = discogs_client.Client('ExampleApplication/0.1')
-    client.set_consumer_key('CHcjnSdrYtRIRWPEjcfI',
-                            'qasuBwasGGrraGIoMtOqKkssYnELwNMK')
-    return jsonify(result=client.get_authorize_url()[2])
-
-
-@app.route('/logout')
-def logout():
-    global client
-    client = None
-    return redirect(url_for('home'))
+    process = map_process.ProcessMap(client, "countries.txt")
+    process.request_values("", read_file="style-countries.txt", type=type, style=style, year=year)
+    #data = process.percentage_list(add_values=True)
+    data = process.values_list()
+    data.insert(0, ["Country", "Releases"])
+    print(data)
+    return jsonify(result=data)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-'''@app.route('/login', methods=["GET", "POST"])
-def login():
-    if request.method == "GET":
-        return render_template('login.html', authorize_url=None)
-    elif request.method == "POST":
-        if request.form['login_type'] == 'user':
-            return redirect(url_for('user_login'))
-        elif request.form['login_type'] == 'common':
-            global client
-            client = discogs_client.Client('ExampleApplication/0.1',
-                          user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
-            return redirect(url_for('home'))
-
-
-@app.route('/userLogin', methods=['GET', 'POST'])
-def user_login():
-    if request.method == 'GET':
-        global client
-        client = discogs_client.Client('ExampleApplication/0.1')
-        client.set_consumer_key('CHcjnSdrYtRIRWPEjcfI',
-                                'qasuBwasGGrraGIoMtOqKkssYnELwNMK')
-        return render_template('login.html', authorize_url=client.get_authorize_url()[2])
-    elif request.method == 'POST':
-        client.get_access_token(request.form['acess'])
-        return redirect(url_for('home'))'''
