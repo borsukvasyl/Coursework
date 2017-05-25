@@ -80,4 +80,5 @@ print(result)
 ```
 ***
 [Vasyl Borsuk](https://github.com/borsukvasyl/Coursework) – borsuk@ucu.edu.ua
+
 [CS@UCU](http://cs.ucu.edu.ua/)
