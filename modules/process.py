@@ -37,6 +37,13 @@ class ProcessMap(object):
             result += str(i) + ", "
         return result[:-2] + "]"
 
+    def __len__(self):
+        """
+        Returns number of elements.
+        :return: int
+        """
+        return len(self._elements)
+
     def _search(self, type_value, value, **keys):
         """
         Requests given values.
@@ -66,12 +73,12 @@ class ProcessMap(object):
                 type = file.readline().strip()
                 line = file.readline()
                 line = file.readline().strip()
-                # checking whether requested type is in file
+                # checking whether
                 while line:
                     line = line.split("\t")
-                    if line[0].lower() == keys[type]:
+                    if line[0].lower() == keys[type]:  # if type value in file
                         values = eval(line[1])
-                        for num in range(len(values)):
+                        for num in range(len(self)):
                             self._elements[num].value = values[num]
                         return
                     line = file.readline().strip()
@@ -91,7 +98,7 @@ class ProcessMap(object):
             with open(read_file, "r") as file:
                 file.readline()
                 values = eval(file.readline().strip())
-                for num in range(len(values)):
+                for num in range(len(self)):
                     self._elements[num].additional = values[num]
         else:
             for element in self._elements:
@@ -106,7 +113,7 @@ class ProcessMap(object):
             raise ValueError("Firstly request values.")
         result = []
         index = 0
-        while index <  len(self._elements):
+        while index < len(self):
             element = self._elements[index]
             try:
                 if element.value:
@@ -127,7 +134,7 @@ class ProcessMap(object):
             raise ValueError("Firstly request both values.")
         result = []
         index = 0
-        while index <  len(self._elements):
+        while index < len(self):
             element = self._elements[index]
             try:
                 percentage = (element.value / element.additional) * 100
@@ -142,21 +149,3 @@ class ProcessMap(object):
                 # making request too quickly
                 time.sleep(5)
         return result
-
-'''
-import discogs_client
-d = discogs_client.Client('ExampleApplication/0.1',
-                          user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
-
-a = ProcessMap(d, "countries.txt")
-a.request_values(year=2016, style="rock")
-a.request_additional(year=2016)
-print(a)
-
-l = a.percentage_list()
-print(l)
-
-l = a.values_list()
-print(l)
-print(len(l))
-'''

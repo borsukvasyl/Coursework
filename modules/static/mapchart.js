@@ -24,7 +24,7 @@ function draw(chart_data) {
         var options = {
             backgroundColor: '#ffffff',
             defaultColor: '#e5e5e5',
-            colorAxis: {colors: ['#9bffab', '#00762d']}
+            colorAxis: {colors: ['#9bffab', '#005f25']}
         };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
