@@ -32,7 +32,7 @@
 ```sh
 git clone https://github.com/borsukvasyl/Coursework.git
 ```
-Після клонування проекту ви можете запустити його
+Після клонування проекту ви можете запустити його з `modules/run.py`
 ***
 Для обновлення інформації або добавленням нової скористайтеся модулем `modules/renew_data.py`, який містить функцію save_data
 ```python
