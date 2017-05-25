@@ -58,7 +58,7 @@ class Element(object):
     """
     Implementation of element for Array.
     """
-    def __init__(self, item, value = None, additional=None):
+    def __init__(self, item, value=None, additional=None):
         self.item = item
         self.value = value
         self.additional = additional

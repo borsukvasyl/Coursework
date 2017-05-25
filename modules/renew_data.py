@@ -1,6 +1,7 @@
 import modules.process as process
 import discogs_client
 
+
 def save_data(filename):
     """
     Saves requested data to filename
@@ -12,7 +13,7 @@ def save_data(filename):
 
         # creating client
         client = discogs_client.Client('ExampleApplication/0.1',
-                                  user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
+                                       user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
         a = process.ProcessMap(client, "countries.txt")
 
         # saving additional data
