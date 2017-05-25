@@ -20,7 +20,7 @@
 
 ## Структура
 > Структура проекту:
->- doc/ - модуль з детальним описом усіх етапів виконання проекту
+>- doc/ - модулі з детальними описами усіх етапів виконання проекту
 >- examples/ - містить приклад використання
 >- modules/ - основна частина програми
 >- tests/ - тести для проекту
@@ -28,4 +28,34 @@
 Кожен з Python модулів містить вичерпну документацію та у папці doc міститься детальніший опис.
 
 ## Інструкція
-Щоб запустити проект вам достатньо написати в командному рядку
+Щоб інсталювати це проект вам достатньо лише ввести в командному рядку
+```sh
+git clone https://github.com/borsukvasyl/Coursework.git
+```
+Після клонування проекту ви можете запустити його з `modules/run.py`
+***
+Для обновлення інформації або добавленням нової скористайтеся модулем `modules/renew_data.py`, який містить функцію save_data
+```python
+import modules.renew_data as module
+
+
+# filename - назва файлу куди зберегти інформацію
+module.save_data(filename)
+```
+У модулі `modules/process.py` міститься клас `ProcessMap`, за допомогою якого можете провести власний пошук інформації
+```python
+import discogs_client
+import modules.process as process
+
+
+# USER_TOKEN ви межете отримати в кабінеті розробника свого клієнта на сайті Discogs
+client = discogs_client.Client('ExampleApplication/0.1',
+                               user_token="USER_TOKEN")
+
+# "countries.txt" - файл з переліком ключових елементів
+research = process.ProcessMap(client, "countries.txt")
+research.request_values(year=2016, style="rock")
+result = a.values_list()
+print(result)
+# буде виведено список списків з елементами країна - кількість релізів
+```
