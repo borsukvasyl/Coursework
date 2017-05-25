@@ -7,6 +7,7 @@ class ProcessMap(object):
     """
     ADT for requesting and calculating data.
     """
+
     # enter here params which must be changed in list methods
     change_params = {"UK": "England"}
 
@@ -42,7 +43,7 @@ class ProcessMap(object):
         :param type_value: value of base key
         :param value: value to be searched
         :param keys: key values of request
-        :return: MixedPaginatedList
+        :return: amount of found information
         """
         keys[self._type] = type_value
         while True:
@@ -55,15 +56,17 @@ class ProcessMap(object):
         """
         Requests values of elements in ADT.
         :param value: value to be searched
-        :param read_file: read from file
+        :param read_file: filename
         :param keys: key values of request
         :return: None
         """
+        # reading from file
         if read_file:
             with open(read_file, "r") as file:
                 type = file.readline().strip()
                 line = file.readline()
                 line = file.readline().strip()
+                # checking whether requested type is in file
                 while line:
                     line = line.split("\t")
                     if line[0].lower() == keys[type]:
@@ -79,10 +82,11 @@ class ProcessMap(object):
         """
         Requests additional values of elements in ADT.
         :param value: value to be searched
-        :param read_file: read from file
+        :param read_file: filename
         :param keys: key values of request
         :return: None
         """
+        # reading from file
         if read_file:
             with open(read_file, "r") as file:
                 file.readline()

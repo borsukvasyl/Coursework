@@ -1,6 +1,7 @@
 import discogs_client
 
 
+# user login
 """
 d = discogs_client.Client('ExampleApplication/0.1')
 d.set_consumer_key('CHcjnSdrYtRIRWPEjcfI',
@@ -9,6 +10,7 @@ print("Get verifier here: " + d.get_authorize_url()[2])
 verifier = input("Enter verifier: ")
 d.get_access_token(verifier)
 """
+# commands with your profile
 """
 me = d.identity()
 print("I'm {0} ({1}) from {2}.".format(me.name, me.username, me.location))
@@ -16,11 +18,12 @@ print(len(me.wantlist))
 me.wantlist.add(d.release(5))
 print(len(me.wantlist))
 """
-#"""
+# user token login
+# """
 d = discogs_client.Client('ExampleApplication/0.1',
                           user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
-#"""
-
+# """
+# searching data
 """
 results = d.search('Stockholm By Night', type='release')
 print(results.pages)
