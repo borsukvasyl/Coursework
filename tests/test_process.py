@@ -9,7 +9,7 @@ class TestPrecessMap(unittest.TestCase):
         Setup process.
         """
         client = discogs_client.Client('ExampleApplication/0.1',
-                                       user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
+                                       user_token="USER-TOKEN")
         self.processor = process.ProcessMap(client, "test_countries.txt")
 
     def test_creature(self):

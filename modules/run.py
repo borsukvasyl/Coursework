@@ -13,7 +13,7 @@ def main():
 @app.route("/build_mapchart", methods=["GET"])
 def build_mapchart():
     client = discogs_client.Client('ExampleApplication/0.1',
-                                   user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
+                                   user_token="USER-TOKEN")
 
     type = request.args.get('type', 0, type=str)
     style = request.args.get('style', 0, type=str)

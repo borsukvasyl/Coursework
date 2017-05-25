@@ -3,7 +3,7 @@ import discogs_client
 
 # user login
 """
-d = discogs_client.Client('ExampleApplication/0.1')
+d = discogs_client.Client('KEY', 'SECRET-KEY')
 d.set_consumer_key('CHcjnSdrYtRIRWPEjcfI',
                    'qasuBwasGGrraGIoMtOqKkssYnELwNMK')
 print("Get verifier here: " + d.get_authorize_url()[2])
@@ -21,7 +21,7 @@ print(len(me.wantlist))
 # user token login
 # """
 d = discogs_client.Client('ExampleApplication/0.1',
-                          user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
+                          user_token="USER-TOKEN")
 # """
 # searching data
 """
