@@ -20,22 +20,22 @@
 
 ## Структура
 Структура проекту:
-- doc/ - модулі з детальними описами усіх етапів виконання проекту
-- examples/ - містить приклад використання
+- doc/ - *модулі з детальними описами усіх етапів виконання проекту*
+- examples/ - *містить приклад використання*
   - run.py
-- ntml/ - містить html формат документації даного проекту
-- modules/ - основна частина програми
+- ntml/ - *містить html формат документації даного проекту*
+- modules/ - *основна частина програми*
   - static/
     - mapchart.js
   - templates/
     - mapchart.html
-  - structure.py - реалізація Array
-  - process.py - реалізація ADT
-  - renew_data.py - обновлення інформації
-  - run.py - запуск сайту
+  - structure.py - *реалізація Array*
+  - process.py - *реалізація ADT*
+  - renew_data.py - *обновлення інформації*
+  - run.py - *запуск сайту*
   - style-countries.txt
   - styles.txt
-- tests/ - тести для проекту
+- tests/ - *тести для проекту*
   - test_process.py
   - test_countries.txt
   - test_request.txt
