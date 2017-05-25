@@ -26,7 +26,9 @@
 - ntml/ - містить html формат документації даного проекту
 - modules/ - основна частина програми
   - static/
+    - mapchart.js
   - templates/
+    - mapchart.html
   - structure.py
   - process.py
   - renew_data.py
