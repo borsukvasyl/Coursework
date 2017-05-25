@@ -34,9 +34,27 @@ git clone https://github.com/borsukvasyl/Coursework.git
 ```
 Після клонування проекту ви можете запустити його
 ***
-Для обновлення інформації або добавленням нової скористайтеся модулем *modules/renew_data.py*, який містить функцію save_data
+Для обновлення інформації або добавленням нової скористайтеся модулем `modules/renew_data.py`, який містить функцію save_data
 ```sh
+import modules.renew_data as module
+
+
 # filename - назва файлу куди зберегти інформацію
-save_data(filename)
+module.save_data(filename)
 ```
-У модулі `modules/process.py`
+У модулі `modules/process.py` міститься клас `ProcessMap`, за допомогою якого можете провести власний пошук інформації
+```sh
+import discogs_client
+import modules.process as process
+
+
+client = discogs_client.Client('ExampleApplication/0.1',
+                               user_token="USER_TOKEN")
+
+# "countries.txt" - файл з переліком ключових елементів
+research = process.ProcessMap(client, "countries.txt")
+research.request_values(year=2016, style="rock")
+result = a.values_list()
+print(result)
+# буде виведено список списків з елементами країна - кількість релізів
+```
