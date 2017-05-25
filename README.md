@@ -29,10 +29,10 @@
     - mapchart.js
   - templates/
     - mapchart.html
-  - structure.py
-  - process.py
-  - renew_data.py
-  - run.py
+  - structure.py - реалізація Array
+  - process.py - реалізація ADT
+  - renew_data.py - обновлення інформації
+  - run.py - запуск сайту
   - style-countries.txt
   - styles.txt
 - tests/ - тести для проекту
