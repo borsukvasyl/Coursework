@@ -39,6 +39,7 @@
   - test_process.py
   - test_countries.txt
   - test_request.txt
+- setup.py
 
 Кожен з Python модулів містить вичерпну документацію та у папці doc міститься детальніший опис.
 
