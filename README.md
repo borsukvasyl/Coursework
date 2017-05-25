@@ -48,6 +48,7 @@ import discogs_client
 import modules.process as process
 
 
+# USER_TOKEN ви межете отримати в кабінеті розробника свого клієнта на сайті Discogs
 client = discogs_client.Client('ExampleApplication/0.1',
                                user_token="USER_TOKEN")
 
