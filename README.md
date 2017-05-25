@@ -35,7 +35,7 @@ git clone https://github.com/borsukvasyl/Coursework.git
 Після клонування проекту ви можете запустити його
 ***
 Для обновлення інформації або добавленням нової скористайтеся модулем `modules/renew_data.py`, який містить функцію save_data
-```sh
+```python
 import modules.renew_data as module
 
 
@@ -43,7 +43,7 @@ import modules.renew_data as module
 module.save_data(filename)
 ```
 У модулі `modules/process.py` міститься клас `ProcessMap`, за допомогою якого можете провести власний пошук інформації
-```sh
+```python
 import discogs_client
 import modules.process as process
 
