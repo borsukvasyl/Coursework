@@ -78,3 +78,6 @@ result = a.values_list()
 print(result)
 # буде виведено список списків з елементами країна - кількість релізів
 ```
+***
+[Vasyl Borsuk](https://github.com/borsukvasyl/Coursework) – borsuk@ucu.edu.ua
+[CS@UCU](http://cs.ucu.edu.ua/)
