@@ -1,4 +1,5 @@
-import doc.structure as structures
+import time
+from discogs_client.exceptions import HTTPError
 
 
 class InfoProcessing(object):
@@ -23,6 +24,7 @@ class InfoProcessing(object):
         :return: None
         """
         self._info = self.client.search(value, **keys)
+        print("search", self._info.count)
 
     @staticmethod
     def _get(obj, key):
@@ -41,17 +43,32 @@ class InfoProcessing(object):
         :return: None
         """
         self._filtered_info = {}
-        for obj in self._info:
-            data = self._get(obj, key)
-            if isinstance(data, list):
-                for element in data:
-                    if element not in self._filtered_info:
-                        self._filtered_info[element] = structures.DynamicArray()
-                    self._filtered_info[element].append(obj)
-            else:
-                if data not in self._filtered_info:
-                    self._filtered_info[data] = structures.DynamicArray()
-                self._filtered_info[data].append(obj)
+        obj_num = 0
+        for obj_num in range(self._info.count):
+            try:
+                data = self._get(self._info[obj_num], key)
+                if isinstance(data, list):
+                    for element in data:
+                        if element not in self._filtered_info:
+                            self._filtered_info[element] = 0#structures.DynamicArray()
+                        self._filtered_info[element] += 1#.append(obj)
+                else:
+                    if data not in self._filtered_info:
+                        self._filtered_info[data] = 0#structures.DynamicArray()
+                    self._filtered_info[data] += 1#.append(obj)
+                obj_num += 1
+            except HTTPError:
+                print("sleep")
+                time.sleep(5)
+        print("filter " + str(obj_num))
+        return self._filtered_info
+
+    def number_of_uses(self):
+        result = []
+        for key in self._filtered_info:
+            if "&" not in key:
+                result.append([key, self._filtered_info[key]])
+        return result
 
     def the_most_used(self):
         """
@@ -62,12 +79,15 @@ class InfoProcessing(object):
             raise UserWarning("Firstly filter info")
         result, num = [], 0
         for item in self._filtered_info:
-            if len(self._filtered_info[item]) > num:
+            result.append((item, self._filtered_info[item]))
+            '''if len(self._filtered_info[item]) > num:
                 result = [item]
                 num = len(self._filtered_info[item])
             elif len(self._filtered_info[item]) == num:
                 result.append(item)
-        return result
+        return result'''
+        result.sort(key=lambda x: x[1])
+        return [item[0] for item in result]
 
     def the_least_used(self):
         """

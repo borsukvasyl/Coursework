@@ -15,6 +15,8 @@ class Array:
         self._size = size
         PyArrayType = ctypes.py_object * size
         self._elements = PyArrayType()
+        for i in range(len(self)):
+            self._elements[i] = None
 
     def __len__(self):
         """
@@ -108,3 +110,33 @@ class DynamicArray:
             new_elements[k] = self._elements[k]
         self._elements = new_elements
         self._capacity = capacity
+
+
+class Node(object):
+    def __init__(self, item, value=0):
+        self._item = item
+        self._value = value
+
+
+class MyDict(object):
+    def __init__(self):
+        self.keys = set()
+
+    def __contains__(self, key):
+        for node in self.keys:
+            if key == node._item:
+                return True
+        return False
+
+    def __getitem__(self, key):
+        for node in self.keys:
+            if key == node._item:
+                return node._value
+
+    def __setitem__(self, key, value):
+        for node in self.keys:
+            if key == node._item:
+                node._value = value
+
+    def add(self, key, value):
+        self.keys.add(Node(key, value))
