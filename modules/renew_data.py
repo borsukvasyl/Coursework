@@ -13,7 +13,7 @@ def save_data(filename):
 
         # creating client
         client = discogs_client.Client('ExampleApplication/0.1',
-                                       user_token="USER-TOKEN")
+                                       user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
         a = process.ProcessMap(client, "countries.txt")
 
         # saving additional data

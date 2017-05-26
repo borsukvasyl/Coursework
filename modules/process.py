@@ -70,18 +70,20 @@ class ProcessMap(object):
         # reading from file
         if read_file:
             with open(read_file, "r") as file:
-                type = file.readline().strip()
-                line = file.readline()
-                line = file.readline().strip()
-                # checking whether
-                while line:
-                    line = line.split("\t")
-                    if line[0].lower() == keys[type]:  # if type value in file
-                        values = eval(line[1])
-                        for num in range(len(self)):
-                            self._elements[num].value = values[num]
-                        return
+                line = file.readline().strip().split()
+                if keys[line[0]] == eval(line[1]):
+                    type = file.readline().strip()
+                    line = file.readline()
                     line = file.readline().strip()
+                    # checking whether
+                    while line:
+                        line = line.split("\t")
+                        if line[0].lower() == keys[type].lower():  # if type value in file
+                            values = eval(line[1])
+                            for num in range(len(self)):
+                                self._elements[num].value = values[num]
+                            return
+                        line = file.readline().strip()
         for element in self._elements:
             element.value = self._search(element.item, value, **keys)
 
@@ -96,6 +98,7 @@ class ProcessMap(object):
         # reading from file
         if read_file:
             with open(read_file, "r") as file:
+                file.readline()
                 file.readline()
                 values = eval(file.readline().strip())
                 for num in range(len(self)):

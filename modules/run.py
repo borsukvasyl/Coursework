@@ -13,18 +13,23 @@ def main():
 @app.route("/build_mapchart", methods=["GET"])
 def build_mapchart():
     client = discogs_client.Client('ExampleApplication/0.1',
-                                   user_token="USER-TOKEN")
+                                   user_token="wuYMABvmUDdOMXerFacIXQBQJJphFkPgtivGgfLW")
 
     type = request.args.get('type', 0, type=str)
     style = request.args.get('style', 0, type=str)
     year = int(request.args.get('year', 0, type=int))
+    is_percentage = request.args.get("is_percentage", 0, type=bool)
+    print(is_percentage)
 
     process = map_process.ProcessMap(client, "countries.txt")
     process.request_values("", read_file="style-countries.txt", type=type, style=style, year=year)
-    # process.request_additional("", read_file="style-countries.txt", type=type, year=year)
-    # data = process.percentage_list()
-    data = process.values_list()
-    data.insert(0, ["Country", "Releases"])
+    if is_percentage:
+        process.request_additional("", read_file="style-countries.txt", type=type, year=year)
+        data = process.percentage_list()
+        data.insert(0, ["Country", "Percentage"])
+    else:
+        data = process.values_list()
+        data.insert(0, ["Country", "Releases"])
     print(data)
     return jsonify(result=data)
 
