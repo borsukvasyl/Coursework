@@ -18,12 +18,11 @@ def build_mapchart():
     type = request.args.get('type', 0, type=str)
     style = request.args.get('style', 0, type=str)
     year = int(request.args.get('year', 0, type=int))
-    is_percentage = request.args.get("is_percentage", 0, type=bool)
-    print(is_percentage)
+    is_percentage = request.args.get("percentage", 0, type=str)
 
     process = map_process.ProcessMap(client, "countries.txt")
     process.request_values("", read_file="style-countries.txt", type=type, style=style, year=year)
-    if is_percentage:
+    if is_percentage == "true":
         process.request_additional("", read_file="style-countries.txt", type=type, year=year)
         data = process.percentage_list()
         data.insert(0, ["Country", "Percentage"])

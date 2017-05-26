@@ -7,7 +7,7 @@ function get_chart() {
             type: $('input[name="type"]').val(),
             style: $('input[name="style"]').val(),
             year: $('input[name="year"]').val(),
-            is_percentage: $('input[name="percentage"]').val()//$('#percentage').val() //$('#percentage').is(':checked')
+            percentage: $('#percentage').is(':checked')
         },
         success: function(data) {
             draw(data.result)
